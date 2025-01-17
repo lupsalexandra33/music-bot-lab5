@@ -20,6 +20,7 @@ import code         # code.interact
 import os           # environment variables
 import inspect      # call stack inspection
 import random       # dumb random number generator
+import argparse 
  
 from discord.ext import commands    # Bot class and utils
  
@@ -67,6 +68,11 @@ def log_msg(msg: str, level: str):
 ################################################################################
 ############################## BOT IMPLEMENTATION ##############################
 ################################################################################
+parser = argparse.ArgumentParser()
+parser.add_argument('-t', '--token', help='Bot token')
+args = parser.parse_args()
+
+token = args.token or os.getenv('TOKEN')
  
 # bot instantiation
 intents = discord.Intents.all()
@@ -143,4 +149,4 @@ async def roll_error(ctx, error):
 if __name__ == '__main__':
     # check that token exists in environment
     # launch bot (blocking operation)
-    bot.run("MTMxMTYwNzY2OTU3NjE3MTU0MA.Gc6nyO.cDCrdKElcMaTBXiGmNePyt4gIS8xayjLvATLKQ")
+    bot.run(token)
